@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xs Interface</title>
+    <title>Windows 11 Android Emulator</title>
     <style>
         body, html {
             margin: 0;
@@ -169,6 +169,14 @@
             align-items: center;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s ease-in-out;
+        }
+
+        .bottom-panel.visible {
+            visibility: visible;
+            opacity: 1;
         }
 
         .bottom-panel .app-icon {
@@ -290,7 +298,7 @@
         </div>
     </div>
 
-    <div class="bottom-panel">
+    <div class="bottom-panel" id="bottomPanel">
         <div class="close-button" onclick="window.close();"></div>
         <div class="app-icon">
             <img src="notes-icon.jpg" alt="Notes">
@@ -318,7 +326,8 @@
         }, 3000);
 
         document.querySelector('.start-button').addEventListener('click', function() {
-            document.getElementById('startSound').play();
+            const startSound = document.getElementById('startSound');
+            startSound.play();
 
             const blackScreen = document.querySelector('.black-screen');
             blackScreen.style.display = 'block';
@@ -338,6 +347,10 @@
                 document.querySelector('.apps-grid').style.display = 'grid';
                 document.querySelector('.loading-screen').style.display = 'none';
             }, 2000);
+
+            startSound.onended = function() {
+                document.getElementById('bottomPanel').classList.add('visible');
+            };
         });
 
         document.querySelectorAll('.app img').forEach(function(appIcon, index) {
