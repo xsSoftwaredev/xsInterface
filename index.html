@@ -347,6 +347,21 @@
 
             // Fade in the new background after 1 second of black
             setTimeout(() => {
+            .bottom-panel {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s ease-in-out;
+        }
+
                 document.body.style.backgroundImage = "url('bg.jpg')";
                 background-size: contain; /* Makes the background image smaller */
                 blackScreen.style.display = 'none'; // Remove black screen after fade
