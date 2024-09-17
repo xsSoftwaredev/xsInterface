@@ -10,7 +10,7 @@
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background-image: url('startbg.jpg');
+            background-image: url('bg.jpg');
             background-size: contain; /* Makes the background image smaller */
             background-position: center;
             background-repeat: no-repeat;
@@ -348,6 +348,7 @@
             // Fade in the new background after 1 second of black
             setTimeout(() => {
                 document.body.style.backgroundImage = "url('bg.jpg')";
+                background-size: contain; /* Makes the background image smaller */
                 blackScreen.style.display = 'none'; // Remove black screen after fade
                 document.querySelector('.apps-grid').style.display = 'grid';
                 document.querySelector('.loading-screen').style.display = 'none';
