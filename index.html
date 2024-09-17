@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xs Interface</title>
+    <title>Windows 11 Android Emulator</title>
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background-image: url('bg.jpg');
+            background-image: url('startbg.jpg');
             background-size: cover;
             background-position: center;
             transition: background 1s ease-in-out;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
@@ -55,50 +54,38 @@
             animation-delay: 0s;
             transform: rotate(0deg) translate(35px);
         }
-
         .loading div:nth-child(2) {
             animation-delay: -0.1s;
             transform: rotate(45deg) translate(35px);
         }
-
         .loading div:nth-child(3) {
             animation-delay: -0.2s;
             transform: rotate(90deg) translate(35px);
         }
-
         .loading div:nth-child(4) {
             animation-delay: -0.3s;
             transform: rotate(135deg) translate(35px);
         }
-
         .loading div:nth-child(5) {
             animation-delay: -0.4s;
             transform: rotate(180deg) translate(35px);
         }
-
         .loading div:nth-child(6) {
             animation-delay: -0.5s;
             transform: rotate(225deg) translate(35px);
         }
-
         .loading div:nth-child(7) {
             animation-delay: -0.6s;
             transform: rotate(270deg) translate(35px);
         }
-
         .loading div:nth-child(8) {
             animation-delay: -0.7s;
             transform: rotate(315deg) translate(35px);
         }
 
         @keyframes loading-animation {
-            0% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         .welcome-text {
@@ -171,14 +158,59 @@
         .fade-in {
             opacity: 1;
         }
+
+        .bottom-panel {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .bottom-panel .app-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid black;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .bottom-panel .close-button {
+            background: transparent;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .bottom-panel .close-button:after {
+            content: 'X';
+            color: black;
+            font-size: 18px;
+        }
+
+        .bottom-panel .date-time {
+            font-size: 14px;
+        }
     </style>
 </head>
-
 <body>
 
     <div class="loading-screen">
         <img src="xs.jpg" alt="Profile Image" class="profile-image">
-        <div class="welcome-text">xS Interface</div>
         <div class="loading">
             <div></div>
             <div></div>
@@ -258,6 +290,26 @@
         </div>
     </div>
 
+    <div class="bottom-panel">
+        <div class="close-button" onclick="window.close();"></div>
+        <div class="app-icon">
+            <img src="notes-icon.jpg" alt="Notes">
+        </div>
+        <div class="app-icon">
+            <img src="call-icon.jpg" alt="Call">
+        </div>
+        <div class="app-icon">
+            <img src="youtube-icon.jpg" alt="YouTube">
+        </div>
+        <div class="app-icon">
+            <img src="spotify-icon.jpg" alt="Spotify">
+        </div>
+        <div class="app-icon">
+            <img src="chrome-icon.jpg" alt="Chrome">
+        </div>
+        <div class="date-time" id="dateTime"></div>
+    </div>
+
     <audio id="startSound" src="start-sound.mp3"></audio>
 
     <script>
@@ -265,7 +317,7 @@
             document.querySelector('.start-button').style.display = 'block';
         }, 3000);
 
-        document.querySelector('.start-button').addEventListener('click', function () {
+        document.querySelector('.start-button').addEventListener('click', function() {
             document.getElementById('startSound').play();
 
             const blackScreen = document.querySelector('.black-screen');
@@ -281,15 +333,15 @@
 
             // Fade in the new background after 1 second of black
             setTimeout(() => {
-                document.body.style.backgroundImage = "url(bg.jpg')";
+                document.body.style.backgroundImage = "url('bg.jpg')";
                 blackScreen.style.display = 'none'; // Remove black screen after fade
                 document.querySelector('.apps-grid').style.display = 'grid';
                 document.querySelector('.loading-screen').style.display = 'none';
             }, 2000);
         });
 
-        document.querySelectorAll('.app img').forEach(function (appIcon, index) {
-            appIcon.addEventListener('click', function () {
+        document.querySelectorAll('.app img').forEach(function(appIcon, index) {
+            appIcon.addEventListener('click', function() {
                 switch (index) {
                     case 0:
                         window.location.href = 'https://www.google.com/keep/';
@@ -339,8 +391,20 @@
                 }
             });
         });
+
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const date = now.toDateString();
+
+            document.getElementById('dateTime').textContent = `${hours}:${minutes}:${seconds} ${date}`;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 
 </body>
-
 </html>
