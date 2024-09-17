@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xs External Interface</title>
+    <title>XS External Interface</title>
     <style>
         body, html {
             margin: 0;
@@ -11,9 +11,10 @@
             height: 100%;
             font-family: Arial, sans-serif;
             background-image: url('startbg.jpg');
-            background-size: cover;
+            background-size: contain; /* Makes the background image smaller */
             background-position: center;
-            transition: background 1s ease-in-out;
+            background-repeat: no-repeat;
+            background-color: black;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -125,6 +126,8 @@
             left: 5%;
             grid-template-columns: repeat(5, 1fr);
             grid-gap: 20px;
+            width: 90%;
+            max-width: 1200px;
         }
 
         .app {
@@ -300,20 +303,22 @@
 
     <div class="bottom-panel" id="bottomPanel">
         <div class="close-button" onclick="window.close();"></div>
-        <div class="app-icon">
-            <img src="notes-icon.jpg" alt="Notes">
-        </div>
-        <div class="app-icon">
-            <img src="call-icon.jpg" alt="Call">
-        </div>
-        <div class="app-icon">
-            <img src="youtube-icon.jpg" alt="YouTube">
-        </div>
-        <div class="app-icon">
-            <img src="spotify-icon.jpg" alt="Spotify">
-        </div>
-        <div class="app-icon">
-            <img src="chrome-icon.jpg" alt="Chrome">
+        <div class="bottom-icons">
+            <div class="app-icon" onclick="window.location.href='https://www.google.com/keep/';">
+                <img src="notes-icon.jpg" alt="Notes">
+            </div>
+            <div class="app-icon" onclick="window.location.href='tel:';">
+                <img src="call-icon.jpg" alt="Call">
+            </div>
+            <div class="app-icon" onclick="window.location.href='https://www.youtube.com/';">
+                <img src="youtube-icon.jpg" alt="YouTube">
+            </div>
+            <div class="app-icon" onclick="window.location.href='https://www.spotify.com/';">
+                <img src="spotify-icon.jpg" alt="Spotify">
+            </div>
+            <div class="app-icon" onclick="window.location.href='https://www.google.com/chrome/';">
+                <img src="chrome-icon.jpg" alt="Chrome">
+            </div>
         </div>
         <div class="date-time" id="dateTime"></div>
     </div>
@@ -351,58 +356,6 @@
             startSound.onended = function() {
                 document.getElementById('bottomPanel').classList.add('visible');
             };
-        });
-
-        document.querySelectorAll('.app img').forEach(function(appIcon, index) {
-            appIcon.addEventListener('click', function() {
-                switch (index) {
-                    case 0:
-                        window.location.href = 'https://www.google.com/keep/';
-                        break;
-                    case 1:
-                        window.location.href = 'tel:';
-                        break;
-                    case 2:
-                        window.location.href = 'sms:';
-                        break;
-                    case 3:
-                        window.location.href = 'https://www.youtube.com/';
-                        break;
-                    case 4:
-                        window.location.href = 'https://www.google.com/chrome/';
-                        break;
-                    case 5:
-                        window.location.href = 'https://mail.google.com/';
-                        break;
-                    case 6:
-                        window.location.href = 'camera-app-url';
-                        break;
-                    case 7:
-                        window.location.href = 'gallery-app-url';
-                        break;
-                    case 8:
-                        window.location.href = 'https://maps.google.com/';
-                        break;
-                    case 9:
-                        window.location.href = 'settings-app-url';
-                        break;
-                    case 10:
-                        window.location.href = 'calculator-app-url';
-                        break;
-                    case 11:
-                        window.location.href = 'calendar-app-url';
-                        break;
-                    case 12:
-                        window.location.href = 'clock-app-url';
-                        break;
-                    case 13:
-                        window.location.href = 'playstore-app-url';
-                        break;
-                    case 14:
-                        window.location.href = 'spotify-app-url';
-                        break;
-                }
-            });
         });
 
         function updateTime() {
