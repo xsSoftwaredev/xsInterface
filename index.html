@@ -10,10 +10,6 @@
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background-image: url('bg.jpg');
-            background-size: contain; /* Makes the background image smaller */
-            background-position: center;
-            background-repeat: no-repeat;
             background-color: black;
             display: flex;
             flex-direction: column;
@@ -30,6 +26,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            background-color: black;
         }
 
         .loading {
@@ -89,34 +86,10 @@
             100% { opacity: 0; }
         }
 
-        .welcome-text {
-            font-size: 24px;
-            color: white;
-            margin-top: 20px;
-        }
-
         .profile-image {
             width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
+            height: auto;
             margin-bottom: 20px;
-        }
-
-        .start-button {
-            display: none;
-            background: transparent;
-            border: 2px solid white;
-            padding: 10px 20px;
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-
-        .start-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
         }
 
         .apps-grid {
@@ -232,8 +205,6 @@
             <div></div>
             <div></div>
         </div>
-        <div class="welcome-text">Welcome</div>
-        <button class="start-button">Start</button>
     </div>
 
     <div class="black-screen"></div>
@@ -259,46 +230,7 @@
             <img src="chrome-icon.jpg">
             <div class="app-name">Chrome</div>
         </div>
-        <div class="app">
-            <img src="gmail-icon.jpg">
-            <div class="app-name">Gmail</div>
-        </div>
-        <div class="app">
-            <img src="camera-icon.jpg">
-            <div class="app-name">Camera</div>
-        </div>
-        <div class="app">
-            <img src="gallery-icon.jpg">
-            <div class="app-name">Gallery</div>
-        </div>
-        <div class="app">
-            <img src="maps-icon.jpg">
-            <div class="app-name">Maps</div>
-        </div>
-        <div class="app">
-            <img src="settings-icon.jpg">
-            <div class="app-name">Settings</div>
-        </div>
-        <div class="app">
-            <img src="calculator-icon.jpg">
-            <div class="app-name">Calculator</div>
-        </div>
-        <div class="app">
-            <img src="calendar-icon.jpg">
-            <div class="app-name">Calendar</div>
-        </div>
-        <div class="app">
-            <img src="clock-icon.jpg">
-            <div class="app-name">Clock</div>
-        </div>
-        <div class="app">
-            <img src="playstore-icon.jpg">
-            <div class="app-name">Play Store</div>
-        </div>
-        <div class="app">
-            <img src="spotify-icon.jpg">
-            <div class="app-name">Spotify</div>
-        </div>
+        <!-- Add more apps here -->
     </div>
 
     <div class="bottom-panel" id="bottomPanel">
@@ -327,52 +259,21 @@
 
     <script>
         setTimeout(() => {
-            document.querySelector('.start-button').style.display = 'block';
-        }, 3000);
-
-        document.querySelector('.start-button').addEventListener('click', function() {
-            const startSound = document.getElementById('startSound');
-            startSound.play();
-
             const blackScreen = document.querySelector('.black-screen');
             blackScreen.style.display = 'block';
             blackScreen.classList.add('fade-in');
             document.body.style.transition = "background 1s";
 
-            // Fade out the current background to black
+            // Fade out the black screen after 1 second
             setTimeout(() => {
-                document.body.style.backgroundImage = "none";
-                blackScreen.classList.remove('fade-in');  // Black screen fully covers the screen
-            }, 1000);
-
-            // Fade in the new background after 1 second of black
-            setTimeout(() => {
-            .bottom-panel {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background-color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s, opacity 0.5s ease-in-out;
-        }
-
+                blackScreen.classList.remove('fade-in');
+                blackScreen.style.display = 'none';
                 document.body.style.backgroundImage = "url('bg.jpg')";
-                background-size: contain; /* Makes the background image smaller */
-                blackScreen.style.display = 'none'; // Remove black screen after fade
                 document.querySelector('.apps-grid').style.display = 'grid';
                 document.querySelector('.loading-screen').style.display = 'none';
-            }, 2000);
-
-            startSound.onended = function() {
                 document.getElementById('bottomPanel').classList.add('visible');
-            };
-        });
+            }, 2000);
+        }, 3000);
 
         function updateTime() {
             const now = new Date();
